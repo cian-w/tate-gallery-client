@@ -1,17 +1,17 @@
 <template>
-  <div class="hello">
-
-  </div>
 </template>
 
 <script>
+import NavBar from './NavBar.vue'
 export default {
-  name: 'HelloWorld',
+  name: 'Main',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
-  }
+  },
+
+
 }
 </script>
 
