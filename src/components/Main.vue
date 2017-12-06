@@ -1,17 +1,13 @@
 <template>
+  <carousel></carousel>
 </template>
 
 <script>
-import NavBar from './NavBar.vue'
+import Carousel from './Carousel.vue'
+
 export default {
   name: 'Main',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  },
-
-
+  components: { Carousel }
 }
 </script>
 

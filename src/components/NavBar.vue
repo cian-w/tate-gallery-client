@@ -33,6 +33,9 @@ export default {
 <style scoped>
   .navbar {
     background-color: black;
+    width: 80%;
+    left: 10%;
+    border-radius: 5px;
   }
 
   a {
