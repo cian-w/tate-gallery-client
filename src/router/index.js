@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/components/Main'
 import Login from '@/components/Login'
+import Artwork from '@/components/Artwork'
 import Carousel3d from 'vue-carousel-3d';
 
 Vue.use(Carousel3d);
@@ -16,13 +17,13 @@ export default new Router({
     },
     {
       path: '/artwork',
-      name: 'Main',
-      component: Main
+      name: 'Artwork',
+      component: Artwork
     },
     {
       path: '/login',
       name: 'Login',
       component: Login
-    },
+    }
   ]
 })
