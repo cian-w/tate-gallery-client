@@ -1,19 +1,25 @@
 <template>
-  <ul id="example-1">
-    <li v-for="art in artwork">
-      <div id="f1_container">
-        <div id="f1_card" class="shadow">
-          <div class="front face">
-            <img class="img" :src="art.thumbnailUrl"/>
-          </div>
-          <div class="back face center">
-            <p>{{art.artist}}</p>
-            <button>Add to Cart</button>
+  <div id="art">
+    <div class="row" v-for="i in Math.ceil(artwork.length / 3)">
+      <br>
+      <span v-for="piece in artwork.slice((i - 1) * 3, i * 3)">
+        <div id="f1_container">
+          <div id="f1_card" class="shadow">
+            <div class="front face">
+              <img class="img" :src="piece.thumbnailUrl"/>
+            </div>
+            <div class="back face center">
+              <p><b>Artist: </b>{{piece.artist}}</p>
+              <p><b>Title: </b>{{piece.title}}</p>
+              <p>&euro;	{{piece.price}}</p>
+
+              <button type="button" class="btn btn-success" v-on:click="addToCart(piece)">Add to Cart</button>
+            </div>
           </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </span>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -23,7 +29,8 @@ export default {
 
   data () {
     return {
-      artwork: []
+      artwork: [],
+      cart: []
     }
   },
 
@@ -36,7 +43,16 @@ export default {
       }).then((data) => {
         this.artwork = data;
       });
-    }
+    },
+
+    addToCart(piece){
+      var cartItem = {
+        id: piece.id,
+        title: piece.title,
+        price: piece.price
+      }
+      this.cart.push(cartItem);
+    },
   },
 
   // When page first loads get some images to show.
@@ -48,7 +64,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  #art {
+    position: relative;
+    left: 10.7%;
+  }
   ul {
     list-style-type: none;
   }
@@ -94,12 +113,13 @@ export default {
     transform: rotateY(180deg);
     box-sizing: border-box;
     padding: 10px;
-    color: white;
+    color: black;
     text-align: center;
-    background-color: #aaa;
+    background-color: #dadee5;
+    font-size: 20px;
   }
 
-  button hover {
+  .btn {
     cursor: pointer;
   }
 </style>
