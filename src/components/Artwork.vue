@@ -1,5 +1,12 @@
 <template>
   <div id="art">
+    <br>
+    <div class="input-group col-lg-3">
+     <input type="text" class="form-control" placeholder="Search artwork...">
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="button">Go!</button>
+      </span>
+    </div><!-- /input-group -->
     <div class="row" v-for="i in Math.ceil(artwork.length / 3)">
       <br>
       <span v-for="piece in artwork.slice((i - 1) * 3, i * 3)">
@@ -9,6 +16,8 @@
               <img class="img" :src="piece.thumbnailUrl"/>
             </div>
             <div class="back face center">
+              <br>
+
               <p><b>Artist: </b>{{piece.artist}}</p>
               <p><b>Title: </b>{{piece.title}}</p>
               <p>&euro;	{{piece.price}}</p>

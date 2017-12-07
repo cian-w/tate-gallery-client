@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
-  <form class="form-signin">
-    <h2 class="form-signin-heading">Tate Gallery Login</h2>
-    <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+  <form class="form-signin"><br>
+    <h2 class="form-signin-heading">Tate Gallery Login</h2><br><br>
+    <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" /><br>
     <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
     <label class="checkbox">
       <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
