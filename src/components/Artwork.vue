@@ -1,12 +1,37 @@
 <template>
   <div id="art">
     <br>
-    <div class="input-group col-lg-3">
-     <input type="text" class="form-control" placeholder="Search artwork...">
-      <span class="input-group-btn">
-        <button class="btn btn-success" type="button">Go!</button>
-      </span>
-    </div><!-- /input-group -->
+    <div class="row">
+      <!-- Search Bar -->
+      <div class="input-group col-lg-5">
+       <input type="text" class="form-control" placeholder="Search artwork...">
+        <span class="input-group-btn">
+          <button class="btn btn-success" type="button">Go!</button>
+        </span>
+      </div>
+      <!-- Filter By Artist -->
+      <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter By Artist
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+      </div>
+      <!-- Filter By Artwork -->
+      <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter By Artwork
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+      </div>
+      <!-- Filter By Genre -->
+      <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter By Genre
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+      </div>
+    </div>
+
     <div class="row" v-for="i in Math.ceil(artwork.length / 3)">
       <br>
       <span v-for="piece in artwork.slice((i - 1) * 3, i * 3)">
@@ -22,11 +47,33 @@
               <p><b>Title: </b>{{piece.title}}</p>
               <p>&euro;	{{piece.price}}</p>
 
-              <button type="button" class="btn btn-success" v-on:click="addToCart(piece)">Add to Cart</button>
+              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" v-on:click="addToCart(piece)">Add to Cart</button>
             </div>
           </div>
         </div>
       </span>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+
+          </div>
+          <div class="modal-body">
+            <p><b>Please Choose a Quantity</b></p>
+            <input type="number" class="form-control col-lg-2 qty" value="1">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Add to Order</button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -94,6 +141,10 @@ export default {
     z-index: 1;
   }
 
+  .qty {
+    left: 42%;
+  }
+
   #f1_container {
     perspective: 1000;
   }
@@ -130,5 +181,9 @@ export default {
 
   .btn {
     cursor: pointer;
+  }
+
+  .dropdown {
+    padding-left: 50px;
   }
 </style>
