@@ -1,7 +1,7 @@
 <template>
   <div id="art">
     <br>
-    <div class="row">
+    <div class="row sorting">
       <!-- Search Bar -->
       <div class="input-group col-lg-5">
        <input type="text" class="form-control" placeholder="Search artwork...">
@@ -16,23 +16,9 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
       </div>
-      <!-- Filter By Artwork -->
-      <div class="dropdown">
-        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Filter By Artwork
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
-      </div>
-      <!-- Filter By Genre -->
-      <div class="dropdown">
-        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Filter By Genre
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
-      </div>
     </div>
 
-    <div class="row" v-for="i in Math.ceil(artwork.length / 3)">
+    <div class="row images" v-for="i in Math.ceil(artwork.length / 3)">
       <br>
       <span v-for="piece in artwork.slice((i - 1) * 3, i * 3)">
         <div id="f1_container">
@@ -122,7 +108,16 @@ export default {
 <style scoped>
   #art {
     position: relative;
-    left: 10.7%;
+  }
+
+  .images {
+    position: relative;
+    left: 8%;
+  }
+
+  .sorting {
+    position: relative;
+    left: 25%;
   }
   ul {
     list-style-type: none;
@@ -147,6 +142,8 @@ export default {
 
   #f1_container {
     perspective: 1000;
+    margin-bottom: 30px;
+    margin-left: 20px;
   }
 
   #f1_card {
@@ -154,6 +151,9 @@ export default {
     height: 100%;
     transform-style: preserve-3d;
     transition: all 1.0s linear;
+    -webkit-box-shadow: 0px 17px 23px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 17px 23px -1px rgba(0,0,0,0.75);
+box-shadow: 0px 17px 23px -1px rgba(0,0,0,0.75);
   }
 
   #f1_container:hover #f1_card {

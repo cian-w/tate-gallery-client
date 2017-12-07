@@ -7,7 +7,7 @@
     <label class="checkbox">
       <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
     </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+    <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
   </form>
 </div>
 </template>
@@ -29,6 +29,9 @@
     margin: 0 auto;
     background-color: #fff;
     border: 1px solid rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0px 17px 23px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 17px 23px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 17px 23px -1px rgba(0,0,0,0.75);
 
     .form-signin-heading,
   	.checkbox {
