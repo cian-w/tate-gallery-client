@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+  <!-- Login Structure -->
   <form class="form-signin"><br>
     <h2 class="form-signin-heading">Tate Gallery Login</h2><br><br>
     <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" /><br>

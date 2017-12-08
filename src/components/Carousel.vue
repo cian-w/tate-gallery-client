@@ -1,5 +1,6 @@
 <template>
   <div class="carousel">
+    <!-- Carousel structure -->
     <carousel-3d :autoplay="true" :height="400" :width="400">
       <slide :index="0">
         <img src="http://www.tate.org.uk/sites/default/files/styles/width-420/public/home_decor_mathinna_2_1999.jpg">
@@ -28,6 +29,7 @@
 </template>
 
 <script>
+// Import module
 import { Carousel3d, Slide } from 'vue-carousel-3d';
 export default {
   components: {

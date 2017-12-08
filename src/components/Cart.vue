@@ -9,8 +9,19 @@
     <div class="cart-body" v-bind:class="{ hideCart: cartHidden }">
       <br>
       <h4> Your Cart </h4>
+      <br><br>
       <ul>
+        <li class="cart-item" v-for="item in cartItems">
+          <span class="item-thumbnail"><img :src="item.thumbnailUrl"/></span>
+          <span class="item-title">{{ item.title }}</span>
+          <span class="item-price"> &euro;{{ item.price }}</span>
+          <span class="remove">-</span>
+          <span class="qty">1</span>
+          <span class="add">+</span>
+        </li>
       </ul>
+      <span class="total-price">Total &euro;{{total}}</span>
+      <button class="btn btn-success">Checkout</button>
     </div>
   </div>
 </template>
@@ -22,7 +33,8 @@ export default {
   data () {
     return {
       cartHidden: true,
-      cartItems: []
+      cartItems: [],
+      total: 0
     }
   },
   methods: {
@@ -31,19 +43,89 @@ export default {
       if(this.cartHidden){
         this.cartHidden = false;
         this.cartItems = JSON.parse(localStorage.getItem("cart"));
+        this.cartItems.shift();
+        this.calculateTotal();
       } else {
         this.cartHidden = true;
       }
+    },
+
+    // Calculate total
+    calculateTotal(){
+      this.total = 0;
+      for (var item of this.cartItems) {
+        this.total = this.total + parseInt(item.price);
+      }
+    },
+
+    // Store order in DB
+    checkout(){
+      localStorage.clear();
     }
   }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .total-price {
+    position: absolute;
+    top: 380px;
+    left: 150px;
+    font-size: 23px;
+  }
+
+  .btn {
+    position: absolute;
+    top: 430px;
+    left: 155px;
+  }
+
+  .add, .remove {
+    color: green;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+    top: -8px;
+    left: 110px;
+  }
+
+  .qty {
+    position: relative;
+    top: -8px;
+    left: 110px;
+    font-weight: bold;
+  }
+  .item-price {
+    position: relative;
+    left: 60px;
+    top: -8px;
+  }
+
+  .item-title {
+    position: absolute;
+    left: 60px;
+  }
+  .cart-item {
+    margin: 25px;
+  }
+
+  .item-thumbnail {
+    position: absolute;
+    left: 20px;
+  }
+  ul {
+    list-style-type: none;
+  }
+
+  img {
+    height: 30px;
+    width: 30px;
+  }
 
   .cart-toggle {
     position: fixed;
-    right:300px;
+    right:400px;
     top: 150px;
     height: 56px;
     width: 60px;
@@ -65,13 +147,14 @@ export default {
     right: 0;
     top: 100px;
     height: 500px;
-    width: 300px;
+    width: 400px;
     border: 2px solid green;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     background-color: white;
     -webkit-transition: all 0.5s ease-out;
     z-index: 100;
+    font-weight: bold;
   }
 
   .hideToggle {
@@ -81,7 +164,7 @@ export default {
   }
 
   .hideCart {
-    right: -300px;
+    right: -400px;
     -webkit-transition: all 0.5s ease-out;
 
   }

@@ -84,6 +84,7 @@ export default {
   },
 
   methods: {
+    // Load some images
     getInitialImages() {
       fetch(`http://localhost:8081/`,{
         method: 'GET'
@@ -94,6 +95,7 @@ export default {
       });
     },
 
+    // Load artists names for filter dropdown
     getArtistsNames() {
       fetch(`http://localhost:8081/artists`,{
         method: 'GET'
@@ -104,6 +106,7 @@ export default {
       });
     },
 
+    // Search DB for user's term
     searchArtwork() {
       if(this.searchTerm != '') {
         fetch(`http://localhost:8081/search/${this.searchTerm}`,{
@@ -116,6 +119,7 @@ export default {
       }
     },
 
+    // Filter DB by artist
     filterByArtist(artistId) {
       fetch(`http://localhost:8081/filterArtist/${artistId}`,{
         method: 'GET'
@@ -126,6 +130,7 @@ export default {
       });
     },
 
+    // Filter by price
     filterByPrice(order) {
       fetch(`http://localhost:8081/filterPrice/${order}`,{
         method: 'GET'
