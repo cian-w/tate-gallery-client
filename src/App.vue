@@ -27,7 +27,4 @@ export default {
   color: #2c3e50;
 }
 
-.cart-component {
-  z-index: 99999;
-}
 </style>

@@ -54,38 +54,19 @@
               <p><b>Title: </b>{{piece.title}}</p>
               <p>&euro;	{{piece.price}}</p>
 
-              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" v-on:click="createCartItem(piece)">Add to Cart</button>
+              <button type="button" class="btn btn-info btn-lg" v-on:click="addToCart(piece)">Add to Cart</button>
             </div>
           </div>
         </div>
       </span>
     </div>
 
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
 
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-
-          </div>
-          <div class="modal-body">
-            <p><b>Please Choose a Quantity</b></p>
-            <input type="number" class="form-control col-lg-2 qty" v-model="cartItem.qty">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal" v-on:click="addToCart">Add to Order</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
+import Cart from './Cart.vue'
 
 export default {
   name: 'Artwork',
@@ -99,13 +80,7 @@ export default {
       artistId: 0,
       low: 'low',
       high: 'high',
-      quantity: 1,
-      cartItem: {
-        id: 0,
-        title: '',
-        price: 0,
-        qty: 1
-      }
+      quantity: 1
     }
   },
 
@@ -132,7 +107,7 @@ export default {
 
     searchArtwork() {
       if(this.searchTerm != '') {
-        fetch(`http://localhost:3000/search/${this.searchTerm}`,{
+        fetch(`http://localhost:8081/search/${this.searchTerm}`,{
           method: 'GET'
         }).then((response) => {
           return response.json();
@@ -143,7 +118,7 @@ export default {
     },
 
     filterByArtist(artistId) {
-      fetch(`http://localhost:3000/filterArtist/${artistId}`,{
+      fetch(`http://localhost:8081/filterArtist/${artistId}`,{
         method: 'GET'
       }).then((response) => {
         return response.json();
@@ -153,7 +128,7 @@ export default {
     },
 
     filterByPrice(order) {
-      fetch(`http://localhost:3000/filterPrice/${order}`,{
+      fetch(`http://localhost:8081/filterPrice/${order}`,{
         method: 'GET'
       }).then((response) => {
         return response.json();
@@ -162,14 +137,8 @@ export default {
       });
     },
 
-    createCartItem(piece){
-      this.cartItem.id = piece.id;
-      this.cartItem.title = piece.title;
-      this.cartItem.price = piece.price;
-    },
-
-    addToCart(){
-      this.cart.push(this.cartItem);
+    addToCart(piece){
+      this.cart.push(piece);
     },
   },
 

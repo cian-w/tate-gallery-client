@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import Artwork from './Artwork.vue'
 
 export default {
   name: 'Cart',
@@ -39,17 +40,16 @@ export default {
   watch: {
     // Add/Remove items in cart
     cart(){
+      console.log('watching');
       this.cartItems = cart;
       console.log(this.cartItems);
+      deep: true
     }
   }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .cart {
-    z-index: 100;
-  }
 
   .cart-toggle {
     position: fixed;
@@ -61,6 +61,7 @@ export default {
     border-bottom-left-radius: 5px;
     cursor: pointer;
     -webkit-transition: all 0.5s ease-out;
+    z-index: 100;
   }
 
   .cart-icon {
@@ -80,6 +81,7 @@ export default {
     border-bottom-left-radius: 5px;
     background-color: white;
     -webkit-transition: all 0.5s ease-out;
+    z-index: 100;
   }
 
   .hideToggle {
