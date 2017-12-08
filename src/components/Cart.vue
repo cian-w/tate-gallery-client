@@ -15,9 +15,9 @@
           <span class="item-thumbnail"><img :src="item.thumbnailUrl"/></span>
           <span class="item-title">{{ item.title }}</span>
           <span class="item-price"> &euro;{{ item.price }}</span>
-          <span class="remove">-</span>
-          <span class="qty">1</span>
-          <span class="add">+</span>
+          <span class="remove" v-on:click="removeQty(item)">-</span>
+          <span class="qty">{{ item.qty }}</span>
+          <span class="add" v-on:click="addQty(item)">+</span>
         </li>
       </ul>
       <span class="total-price">Total &euro;{{total}}</span>
@@ -50,11 +50,33 @@ export default {
       }
     },
 
+    // Increase item quantity
+    addQty(itemToAdd){
+      for (var item of this.cartItems) {
+        if(item.id = itemToAdd.id){
+          item.qty = item.qty + 1;
+          this.calculateTotal();
+        }
+      }
+    },
+
+    // Decrease item quantity
+    removeQty(itemToRemove){
+      for (var item of this.cartItems) {
+        if(item.id = itemToRemove.id){
+          if(item.qty != 0){
+            item.qty = item.qty - 1;
+            this.calculateTotal();
+          }
+        }
+      }
+    },
+
     // Calculate total
     calculateTotal(){
       this.total = 0;
       for (var item of this.cartItems) {
-        this.total = this.total + parseInt(item.price);
+        this.total = this.total + (parseInt(item.price) * item.qty);
       }
     },
 

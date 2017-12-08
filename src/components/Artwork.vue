@@ -143,6 +143,7 @@ export default {
 
     // Add item to cart array and store in localStorage
     addToCart(piece){
+      piece.qty = 1;
       this.cart.push(piece);
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
