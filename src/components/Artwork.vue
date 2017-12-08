@@ -66,7 +66,6 @@
 </template>
 
 <script>
-import Cart from './Cart.vue'
 
 export default {
   name: 'Artwork',
@@ -74,7 +73,7 @@ export default {
   data () {
     return {
       artwork: [],
-      cart: [],
+      cart: [0],
       artists: [],
       searchTerm: '',
       artistId: 0,
@@ -137,8 +136,10 @@ export default {
       });
     },
 
+    // Add item to cart array and store in localStorage
     addToCart(piece){
       this.cart.push(piece);
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
   },
 

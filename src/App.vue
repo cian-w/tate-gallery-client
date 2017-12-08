@@ -16,6 +16,10 @@ export default {
   name: 'app',
   components: { NavBar, Cart}
 }
+
+// Clear localStorage on new session as not to have messed up cart items.
+localStorage.clear();
+
 </script>
 
 <style>

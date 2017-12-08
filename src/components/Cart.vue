@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import Artwork from './Artwork.vue'
 
 export default {
   name: 'Cart',
@@ -26,24 +25,15 @@ export default {
       cartItems: []
     }
   },
-  props: ['cart'],
   methods: {
     // Hide and show the cart
     toggleCart() {
       if(this.cartHidden){
         this.cartHidden = false;
+        this.cartItems = JSON.parse(localStorage.getItem("cart"));
       } else {
         this.cartHidden = true;
       }
-    }
-  },
-  watch: {
-    // Add/Remove items in cart
-    cart(){
-      console.log('watching');
-      this.cartItems = cart;
-      console.log(this.cartItems);
-      deep: true
     }
   }
 }
