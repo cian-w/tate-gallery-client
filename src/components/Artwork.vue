@@ -111,7 +111,7 @@ export default {
 
   methods: {
     getInitialImages() {
-      fetch(`http://localhost:3000/`,{
+      fetch(`http://localhost:8081/`,{
         method: 'GET'
       }).then((response) => {
         return response.json();
@@ -121,7 +121,7 @@ export default {
     },
 
     getArtistsNames() {
-      fetch(`http://localhost:3000/artists`,{
+      fetch(`http://localhost:8081/artists`,{
         method: 'GET'
       }).then((response) => {
         return response.json();

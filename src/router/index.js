@@ -9,6 +9,7 @@ Vue.use(Carousel3d);
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',

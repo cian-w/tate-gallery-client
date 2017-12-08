@@ -1,10 +1,12 @@
 <template>
+
+  <!-- Set up the cart structure -->
   <div class="cart">
-    <div class="cart-toggle btn-success">
+    <div class="cart-toggle btn-success" v-bind:class="{ hideToggle: cartShown }" v-on:click="toggleCart">
       <img class="cart-icon" src="../../images/shopping-cart.png">
     </div>
 
-    <div class="cart-body">
+    <div class="cart-body" v-bind:class="{ hideCart: cartShown }">
       <br>
       <h4> Your Cart </h4>
       <ul>
@@ -17,16 +19,26 @@
 
 export default {
   name: 'Cart',
-  data: {
-    return () {
+  data () {
+    return {
+      cartShown: false,
       cartItems: []
     }
   },
   props: ['cart'],
   methods: {
-
+    // Hide and show the cart
+    toggleCart() {
+      if(this.cartShown){
+        this.cartShown = false;
+      } else {
+        this.cartShown = true;
+      }
+      console.log(this.cartShown);
+    }
   },
   watch: {
+    // Add/Remove items in cart
     cart(){
       this.cartItems = cart;
       console.log(this.cartItems);
@@ -49,6 +61,7 @@ export default {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     cursor: pointer;
+    -webkit-transition: all 0.5s ease-out;
   }
 
   .cart-icon {
@@ -58,7 +71,6 @@ export default {
   }
 
   .cart-body {
-
     position: fixed;
     right: 0;
     top: 100px;
@@ -68,5 +80,18 @@ export default {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     background-color: white;
+    -webkit-transition: all 0.5s ease-out;
+  }
+
+  .hideToggle {
+    right: 0;
+    -webkit-transition: all 0.5s ease-out;
+
+  }
+
+  .hideCart {
+    right: -300px;
+    -webkit-transition: all 0.5s ease-out;
+
   }
 </style>
