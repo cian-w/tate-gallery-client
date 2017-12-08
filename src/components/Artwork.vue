@@ -14,9 +14,17 @@
         <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Filter By Artist
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+        <div class="dropdown-menu names" aria-labelledby="dropdownMenuButton">
+          <ul id="example-1">
+            <li v-for="artist in artists" @click="filterByArtist(artist.id)">
+              {{ artist.name }}
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
+
+    <br>
 
     <div class="row images" v-for="i in Math.ceil(artwork.length / 3)">
       <br>
@@ -73,7 +81,9 @@ export default {
     return {
       artwork: [],
       cart: [],
-      searchTerm: ''
+      artists: [],
+      searchTerm: '',
+      artistId: 0
     }
   },
 
@@ -85,6 +95,16 @@ export default {
         return response.json();
       }).then((data) => {
         this.artwork = data;
+      });
+    },
+
+    getArtistsNames() {
+      fetch(`http://localhost:3000/artists`,{
+        method: 'GET'
+      }).then((response) => {
+        return response.json();
+      }).then((data) => {
+        this.artists = data;
       });
     },
 
@@ -101,6 +121,17 @@ export default {
       }
     },
 
+    filterByArtist(artistId) {
+      console.log(artistId);
+      fetch(`http://localhost:3000/filterArtist/${artistId}`,{
+        method: 'GET'
+      }).then((response) => {
+        return response.json();
+      }).then((data) => {
+        this.artwork = data;
+      });
+    },
+
     addToCart(piece){
       var cartItem = {
         id: piece.id,
@@ -114,6 +145,7 @@ export default {
   // When page first loads get some images to show.
   mounted () {
     this.getInitialImages();
+    this.getArtistsNames();
   }
 }
 </script>
@@ -152,6 +184,12 @@ export default {
 
   .qty {
     left: 42%;
+  }
+
+  .names {
+    height: 300px;
+    cursor: pointer;
+    overflow-y: scroll;
   }
 
   #f1_container {
