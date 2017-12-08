@@ -30,8 +30,8 @@
         </button>
         <div class="dropdown-menu price" aria-labelledby="dropdownMenuButton">
           <ul id="example-1">
-            <li @click="filterByArtist(low)">Low - High</li>
-            <li @click="filterByArtist(high)">High - Low</li>
+            <li @click="filterByPrice(low)">Low - High</li>
+            <li @click="filterByPrice(high)">High - Low</li>
           </ul>
         </div>
       </div>
@@ -145,7 +145,7 @@ export default {
       });
     },
 
-    filterByArtist(order) {
+    filterByPrice(order) {
       fetch(`http://localhost:3000/filterPrice/${order}`,{
         method: 'GET'
       }).then((response) => {
