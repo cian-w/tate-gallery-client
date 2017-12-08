@@ -2,11 +2,11 @@
 
   <!-- Set up the cart structure -->
   <div class="cart">
-    <div class="cart-toggle btn-success" v-bind:class="{ hideToggle: cartShown }" v-on:click="toggleCart">
+    <div class="cart-toggle btn-success" v-bind:class="{ hideToggle: cartHidden }" v-on:click="toggleCart">
       <img class="cart-icon" src="../../images/shopping-cart.png">
     </div>
 
-    <div class="cart-body" v-bind:class="{ hideCart: cartShown }">
+    <div class="cart-body" v-bind:class="{ hideCart: cartHidden }">
       <br>
       <h4> Your Cart </h4>
       <ul>
@@ -21,7 +21,7 @@ export default {
   name: 'Cart',
   data () {
     return {
-      cartShown: false,
+      cartHidden: true,
       cartItems: []
     }
   },
@@ -29,12 +29,11 @@ export default {
   methods: {
     // Hide and show the cart
     toggleCart() {
-      if(this.cartShown){
-        this.cartShown = false;
+      if(this.cartHidden){
+        this.cartHidden = false;
       } else {
-        this.cartShown = true;
+        this.cartHidden = true;
       }
-      console.log(this.cartShown);
     }
   },
   watch: {

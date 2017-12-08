@@ -28,6 +28,6 @@ export default {
 }
 
 .cart-component {
-  z-index: 100;
+  z-index: 99999;
 }
 </style>
