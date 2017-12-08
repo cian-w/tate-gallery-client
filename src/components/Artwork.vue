@@ -54,7 +54,7 @@
               <p><b>Title: </b>{{piece.title}}</p>
               <p>&euro;	{{piece.price}}</p>
 
-              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" v-on:click="addToCart(piece)">Add to Cart</button>
+              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" v-on:click="createCartItem(piece)">Add to Cart</button>
             </div>
           </div>
         </div>
@@ -72,11 +72,11 @@
           </div>
           <div class="modal-body">
             <p><b>Please Choose a Quantity</b></p>
-            <input type="number" class="form-control col-lg-2 qty" value="1">
+            <input type="number" class="form-control col-lg-2 qty" v-model="cartItem.qty">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal">Add to Order</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" v-on:click="addToCart">Add to Order</button>
           </div>
         </div>
 
@@ -98,7 +98,14 @@ export default {
       searchTerm: '',
       artistId: 0,
       low: 'low',
-      high: 'high'
+      high: 'high',
+      quantity: 1,
+      cartItem: {
+        id: 0,
+        title: '',
+        price: 0,
+        qty: 1
+      }
     }
   },
 
@@ -155,13 +162,14 @@ export default {
       });
     },
 
-    addToCart(piece){
-      var cartItem = {
-        id: piece.id,
-        title: piece.title,
-        price: piece.price
-      }
-      this.cart.push(cartItem);
+    createCartItem(piece){
+      this.cartItem.id = piece.id;
+      this.cartItem.title = piece.title;
+      this.cartItem.price = piece.price;
+    },
+
+    addToCart(){
+      this.cart.push(this.cartItem);
     },
   },
 

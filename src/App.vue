@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
+    <cart class="cart-component"></cart>
 
     <router-view/>
   </div>
@@ -9,10 +10,11 @@
 <script>
 
 import NavBar from './components/NavBar.vue'
+import Cart from './components/Cart.vue'
 
 export default {
   name: 'app',
-  components: { NavBar }
+  components: { NavBar, Cart}
 }
 </script>
 
@@ -23,5 +25,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.cart-component {
+  z-index: 100;
 }
 </style>
