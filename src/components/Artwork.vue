@@ -22,6 +22,19 @@
           </ul>
         </div>
       </div>
+
+      <!-- Filter By Price -->
+      <div class="dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter By Price
+        </button>
+        <div class="dropdown-menu price" aria-labelledby="dropdownMenuButton">
+          <ul id="example-1">
+            <li @click="filterByArtist(low)">Low - High</li>
+            <li @click="filterByArtist(high)">High - Low</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <br>
@@ -83,7 +96,9 @@ export default {
       cart: [],
       artists: [],
       searchTerm: '',
-      artistId: 0
+      artistId: 0,
+      low: 'low',
+      high: 'high'
     }
   },
 
@@ -110,7 +125,6 @@ export default {
 
     searchArtwork() {
       if(this.searchTerm != '') {
-        console.log('here');
         fetch(`http://localhost:3000/search/${this.searchTerm}`,{
           method: 'GET'
         }).then((response) => {
@@ -122,8 +136,17 @@ export default {
     },
 
     filterByArtist(artistId) {
-      console.log(artistId);
       fetch(`http://localhost:3000/filterArtist/${artistId}`,{
+        method: 'GET'
+      }).then((response) => {
+        return response.json();
+      }).then((data) => {
+        this.artwork = data;
+      });
+    },
+
+    filterByArtist(order) {
+      fetch(`http://localhost:3000/filterPrice/${order}`,{
         method: 'GET'
       }).then((response) => {
         return response.json();
@@ -163,7 +186,7 @@ export default {
 
   .sorting {
     position: relative;
-    left: 25%;
+    left: 18%;
   }
   ul {
     list-style-type: none;
@@ -190,6 +213,10 @@ export default {
     height: 300px;
     cursor: pointer;
     overflow-y: scroll;
+  }
+
+  .price {
+    cursor: pointer;
   }
 
   #f1_container {
