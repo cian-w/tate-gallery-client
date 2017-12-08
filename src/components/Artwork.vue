@@ -4,7 +4,7 @@
     <div class="row sorting">
       <!-- Search Bar -->
       <div class="input-group col-lg-5">
-       <input type="text" class="form-control" placeholder="Search artwork...">
+       <input type="text" class="form-control" placeholder="Search artwork..." v-model="searchTerm" @keyup="searchArtwork">
         <span class="input-group-btn">
           <button class="btn btn-success" type="button">Go!</button>
         </span>
@@ -72,7 +72,8 @@ export default {
   data () {
     return {
       artwork: [],
-      cart: []
+      cart: [],
+      searchTerm: ''
     }
   },
 
@@ -85,6 +86,18 @@ export default {
       }).then((data) => {
         this.artwork = data;
       });
+    },
+
+    searchArtwork() {
+      if(this.searchTerm != null) {
+        fetch(`http://localhost:3000/search/${this.searchTerm}`,{
+          method: 'GET'
+        }).then((response) => {
+          return response.json();
+        }).then((data) => {
+          this.artwork = data;
+        });
+      }
     },
 
     addToCart(piece){
