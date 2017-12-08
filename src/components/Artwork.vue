@@ -89,7 +89,8 @@ export default {
     },
 
     searchArtwork() {
-      if(this.searchTerm != null) {
+      if(this.searchTerm != '') {
+        console.log('here');
         fetch(`http://localhost:3000/search/${this.searchTerm}`,{
           method: 'GET'
         }).then((response) => {
