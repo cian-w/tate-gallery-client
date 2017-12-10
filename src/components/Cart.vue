@@ -83,6 +83,14 @@ export default {
     // Store order in DB
     checkout(){
       localStorage.clear();
+      fetch(`http://localhost:8081/checkout`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: JSON.stringify(this.total)
+
+      });
       this.cartHidden = true;
     }
   }

@@ -100,7 +100,6 @@ export default {
         body: JSON.stringify(artwork)
 
       });
-      console.log(artwork);
     }
   },
 
