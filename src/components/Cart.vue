@@ -3,6 +3,9 @@
   <!-- Set up the cart structure -->
   <div class="cart">
     <div class="cart-toggle btn-success" v-bind:class="{ hideToggle: cartHidden }" v-on:click="toggleCart">
+      <div class="cart-count" v-if="cartItemCount > 0">
+        {{this.cartItemCount}}
+      </div>
       <img class="cart-icon" src="../../images/shopping-cart.png">
     </div>
 
@@ -34,6 +37,7 @@ export default {
     return {
       cartHidden: true,
       cartItems: [],
+      cartItemCount: 0,
       total: 0
     }
   },
@@ -92,12 +96,28 @@ export default {
 
       });
       this.cartHidden = true;
+      this.cartItemCount = 0;
     }
+  },
+  created () {
+    this.$bus.$on('add', () => {
+      this.cartItemCount = this.cartItemCount + 1;
+    })
   }
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .cart-count {
+    height:25px;
+    width: 25px;
+    background-color: red;
+    position: absolute;
+    left: -8.5px;
+    top: -8.5px;
+    border-radius: 100%;
+    font-weight: bold;
+  }
   .total-price {
     position: absolute;
     top: 380px;

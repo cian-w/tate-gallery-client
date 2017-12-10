@@ -146,6 +146,8 @@ export default {
       piece.qty = 1;
       this.cart.push(piece);
       localStorage.setItem("cart", JSON.stringify(this.cart));
+      this.$bus.$emit('add', 'User added to cart');
+
     },
   },
 
