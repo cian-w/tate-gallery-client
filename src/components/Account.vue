@@ -39,7 +39,7 @@
           <tbody>
             <tr v-for="order in orders">
               <td>{{ order.date }}</td>
-              <td>{{ order.price }}</td>
+              <td>&euro;{{ order.price }}</td>
               <td>Yes</td>
             </tr>
           </tbody>

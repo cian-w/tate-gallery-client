@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <nav-bar></nav-bar>
-    <cart class="cart-component"></cart>
+    <cart></cart>
 
     <router-view/>
+
+    <tate-footer></tate-footer>
   </div>
 </template>
 
@@ -11,10 +13,11 @@
 
 import NavBar from './components/NavBar.vue'
 import Cart from './components/Cart.vue'
+import TateFooter from './components/Footer.vue'
 
 export default {
   name: 'app',
-  components: { NavBar, Cart}
+  components: { NavBar, Cart, TateFooter}
 }
 
 // Clear localStorage on new session as not to have messed up cart items.
