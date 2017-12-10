@@ -7,21 +7,21 @@
       <div class="upload" v-if="isAdmin">
         <p class="username">Admin</p>
         <br><br>
-        <form>
+        <div>
           <div class="form-group">
             <label for="exampleInputEmail1"><b>Artwork Title</b></label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="The Punisher">
+            <input type="text" class="form-control"  aria-describedby="emailHelp" v-model="title" placeholder="The Punisher">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1"><b>Artist Name</b></label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="e.g. Frank Castle">
+            <input type="text" class="form-control" v-model="artistName" placeholder="e.g. Frank Castle">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1"><b>Image FileName</b></label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="pic.png">
+            <input type="text" class="form-control" v-model="url" placeholder="pic.png">
           </div>
-          <button type="submit" class="btn btn-success">Upload</button>
-        </form>
+          <button v-on:click="upload" class="btn btn-success">Upload</button>
+        </div>
       </div>
       <div class="upload" v-else>
         <p class="username">User</p>
@@ -49,16 +49,22 @@
   </div>
 </template>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 export default {
   name: 'Account',
   data(){
     return {
       isAdmin: false,
-      orders: []
+      orders: [],
+      title: '',
+      artistName: '',
+      url: '',
+      artwork: {}
     }
   },
   methods: {
+    // Check if user is customer or admin
     checkUserType() {
       if(JSON.parse(localStorage.getItem("session")) == 'admin'){
         this.isAdmin = true;
@@ -66,6 +72,8 @@ export default {
         this.getOrderHistory();
       }
     },
+
+    // Get order history
     getOrderHistory() {
       fetch(`http://localhost:8081/orders`,{
         method: 'GET'
@@ -74,8 +82,29 @@ export default {
       }).then((data) => {
         this.orders = data;
       });
+    },
+
+    // Upload new artwork
+    upload() {
+      var artwork = {
+        title: this.title,
+        artist: this.artistName,
+        url: '../images/' + this.url
+      }
+
+      fetch(`http://localhost:8081/upload`,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: JSON.stringify(artwork)
+
+      });
+      console.log(artwork);
     }
   },
+
+  // Call user type on load.
   mounted(){
     this.checkUserType();
   }
