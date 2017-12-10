@@ -6,6 +6,9 @@
     <center>
       <div class="upload" v-if="isAdmin">
         <p class="username">Admin</p>
+        <br>
+        <button class="btn btn-danger logout" v-on:click="logout">Logout</button>
+
         <br><br>
         <div>
           <div class="form-group">
@@ -26,6 +29,8 @@
       <div class="upload" v-else>
         <p class="username">User</p>
         <br>
+        <button class="btn btn-danger logout" v-on:click="logout">Logout</button>
+        <br><br>
         Here's your order history.
         <br><br>
         <table class="table">
@@ -45,6 +50,7 @@
           </tbody>
         </table>
       </div>
+
     </center>
   </div>
 </template>
@@ -100,6 +106,12 @@ export default {
         body: JSON.stringify(artwork)
 
       });
+    },
+
+    // Log user out
+    logout() {
+      localStorage.clear();
+      window.location.href = "http://localhost:8080/"
     }
   },
 
@@ -125,5 +137,10 @@ export default {
     position: relative;
     top: 120px;
     width: 300px;
+  }
+
+  .logout{
+    position: relative;
+    cursor: pointer;
   }
 </style>
