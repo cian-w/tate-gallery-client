@@ -12,7 +12,10 @@
         <li class="nav-item active">
           <router-link class="nav-link" to="/artwork">Artwork</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" v-if="loggedIn">
+          <router-link class="nav-link" to="/account">Account</router-link>
+        </li>
+        <li class="nav-item" v-else>
           <router-link class="nav-link" to="/login">Login</router-link>
         </li>
       </ul>
@@ -25,8 +28,22 @@ export default {
   name: 'NavBar',
   data () {
     return {
+      loggedIn: false
     }
+  },
+
+  methods: {
+    checkLoggedIn() {
+      this.loggedIn = true;
+    }
+  },
+
+  created () {
+    this.$bus.$on('logged', () => {
+      this.checkLoggedIn();
+    })
   }
+
 }
 </script>
 

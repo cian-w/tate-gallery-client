@@ -4,8 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
+import EventBus from './EventBus'
+
 
 Vue.use(BootstrapVue);
+
+Vue.prototype.$bus = EventBus
+
 
 Vue.config.productionTip = false
 

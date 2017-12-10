@@ -21,7 +21,7 @@
         </li>
       </ul>
       <span class="total-price">Total &euro;{{total}}</span>
-      <button class="btn btn-success">Checkout</button>
+      <button class="btn btn-success checkout" v-on:click="checkout">Checkout</button>
     </div>
   </div>
 </template>
@@ -83,6 +83,7 @@ export default {
     // Store order in DB
     checkout(){
       localStorage.clear();
+      this.cartHidden = true;
     }
   }
 }
@@ -128,6 +129,11 @@ export default {
     position: absolute;
     left: 60px;
   }
+
+  .checkout {
+    cursor: pointer;
+  }
+
   .cart-item {
     margin: 25px;
   }
