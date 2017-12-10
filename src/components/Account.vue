@@ -37,12 +37,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
+            <tr v-for="order in orders">
+              <td>{{ order.date }}</td>
+              <td>{{ order.price }}</td>
+              <td>Yes</td>
             </tr>
-
           </tbody>
         </table>
       </div>
@@ -55,14 +54,26 @@ export default {
   name: 'Account',
   data(){
     return {
-      isAdmin: false
+      isAdmin: false,
+      orders: []
     }
   },
   methods: {
     checkUserType() {
       if(JSON.parse(localStorage.getItem("session")) == 'admin'){
         this.isAdmin = true;
+      } else {
+        this.getOrderHistory();
       }
+    },
+    getOrderHistory() {
+      fetch(`http://localhost:8081/orders`,{
+        method: 'GET'
+      }).then((response) => {
+        return response.json();
+      }).then((data) => {
+        this.orders = data;
+      });
     }
   },
   mounted(){
